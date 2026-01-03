@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Play voice note activation
 
-  playVoiceBtn.addEventListener("click", () => {
+  playVoiceBtn.addEventListener("click", async () => {
     //Hide text + button
     playVoiceBtn.style.opacity = "0";
     document.querySelector(".audio-title").style.opacity = "0";
@@ -342,7 +342,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Darken screen
     darkOverlay.style.opacity = "1";
 
-    transitionToVoiceNote(voiceNote);
+    // transitionToVoiceNote(voiceNote);
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+    bgMusic.src = "";
+
+    setTimeout(async () => {
+      try {
+        await voiceNote.play();
+      } catch (err) {
+        console.error("Voice note failed:", err);
+      }
+    }, 50);
 
     // //Fade background Music
     // fadeOutAudio(bgMusic, 2000);
