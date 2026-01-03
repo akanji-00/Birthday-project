@@ -345,9 +345,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // fadeOutAudio(bgMusic, 2000);
 
     //Start voice note after short delay
-    setTimeout(() => {
-      voiceNote.play();
-    }, 800);
+    // setTimeout(() => {
+    //   voiceNote.play();
+    // }, 800);
   });
 
   //When voicenote ends > show final message
