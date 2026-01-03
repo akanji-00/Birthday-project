@@ -245,9 +245,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const affirmations = [
     "How deeply you care about your friends and family.",
     "How you make intentional efforts for those around you.",
+    "How you speak yoruba and it comes out funny sometimes.",
     "How you smile even when things might be messy inside.",
-    "How you worry about the tiniest of details because you are just so passionate about your vision of things.",
+    "How you always want to make sure I'm fine.",
+    "How you worry about the tiniest of details because of how passionate you are about things.",
     "How you pray on everything no matter how little.",
+    "How that weird laugh of yours has become my favorite sound.",
   ];
 
   const affirmationList = document.getElementById("affirmationList");
@@ -280,7 +283,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "'Men will leave you in the desert without water'",
     "'You don't love me anymore'",
     "'I put you on the best things'",
+    "'I'm an Isale eko babe o'",
     "'Do you even care about me Mohammed'",
+    "'Type shittt' (for absolutely no reason)",
     "'I'm just a girl'",
   ];
 
@@ -366,6 +371,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //When voicenote ends > show final message
   voiceNote.addEventListener("ended", () => {
+    darkOverlay.style.opacity = "0";
     finalMessage.classList.remove("hidden");
   });
 });

@@ -623,12 +623,35 @@ img {
   position: fixed;
   inset: 0;
   display: grid;
-  place-items: center;
+  place-content: center;
   text-align: center;
-  color: white;
   z-index: 11;
 }
 
 #finalMessage h1 {
   font-family: inherit;
+  color: var(--clr-700);
+  margin-bottom: 2rem;
+}
+
+#finalMessage a {
+  text-decoration: none;
+  font-family: inherit;
+  color: var(--clr-700);
+
+  border-color: var(--clr-700);
+
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+
+  justify-self: center;
+
+  transition: all 0.5s ease;
+}
+
+#finalMessage a:hover {
+  background: var(--clr-700);
+  color: white;
 }
