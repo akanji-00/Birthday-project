@@ -89,27 +89,27 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }, 50);
   // }
 
-  function transitionToVoiceNote(voiceAudio, fadeDuration = 2000) {
-    const fadeStep = bgMusic.volume / (fadeDuration / 50);
+  // function transitionToVoiceNote(voiceAudio, fadeDuration = 2000) {
+  //   const fadeStep = bgMusic.volume / (fadeDuration / 50);
 
-    //Fade out background music
-    let fadeInterval = setInterval(() => {
-      if (bgMusic.volume > fadeStep) {
-        bgMusic.volume -= fadeStep;
-      } else {
-        clearInterval(fadeInterval);
+  //   //Fade out background music
+  //   let fadeInterval = setInterval(() => {
+  //     if (bgMusic.volume > fadeStep) {
+  //       bgMusic.volume -= fadeStep;
+  //     } else {
+  //       clearInterval(fadeInterval);
 
-        //HARD STOP (FOR iOS)
-        bgMusic.pause();
-        bgMusic.currentTime = 0;
+  //       //HARD STOP (FOR iOS)
+  //       bgMusic.pause();
+  //       bgMusic.currentTime = 0;
 
-        //Small delay to let safari register pause
-        setTimeout(() => {
-          voiceAudio.play();
-        }, 150);
-      }
-    }, 50);
-  }
+  //       //Small delay to let safari register pause
+  //       setTimeout(() => {
+  //         voiceAudio.play();
+  //       }, 150);
+  //     }
+  //   }, 50);
+  // }
 
   // function startBGM() {
   //   bgMusic.volume = 0;
