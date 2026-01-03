@@ -1,0 +1,634 @@
+/* ==================================================== */
+/* ================== VARIABLES  ====================== */
+/* =================================================== */
+
+:root {
+  /* ===== Colors ===== */
+
+  /* Whites  */
+  --clr-w-100: hsl(0, 0%, 100%);
+  --clr-w-300: hsl(0, 0%, 90%);
+
+  /* Green secondary */
+  --clr-900: hsl(
+    151,
+    47%,
+    11%
+  ); /* Rare, emotional pages promise, silence, audio */
+  --clr-700: hsl(150, 59%, 30%); /* Buttons, borders */
+
+  /* Neutrals */
+  --text-primary: hsl(0, 0%, 11%);
+  --text-muted: hsl(0, 0%, 42%);
+  --text-faint: hsl(154, 4%, 63%);
+
+  /* Accent */
+  --accent-glow: hsla(148, 22%, 77%, 0.35);
+
+  /* Typography */
+  --ff-barlow: "Barlow Condensed", sans-serif; /* Primary font */
+  --ff-display: "Playfair Display", serif; /* Accent font */
+
+  --fs-small: clamp(0.8rem, 0.75rem + 0.1vw, 1rem);
+  --fs-base: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  --fs-lg: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --fs-xl: clamp(1.5rem, 1.35rem + 0.8vw, 2rem);
+
+  /* Spacing scale  */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4rem;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+
+  --container-padding: clamp(1rem, 4vw, 2rem);
+  --container-max: 420px;
+}
+
+/* ==================================================== */
+/* ================== RESETS  ====================== */
+/* =================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.1;
+}
+
+body {
+  background: var(--clr-w-200);
+  font-family: var(--ff-barlow);
+  font-size: var(--fs-base);
+  color: var(--text-primary);
+  font-weight: 500;
+  /* letter-spacing: 0.3em; */
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================================== */
+/* ================== UTILITY CLASSES  ======================= */
+/* ========================================================== */
+
+.grid {
+  display: grid;
+}
+
+.place-center {
+  place-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.gap {
+  gap: var(--gap, 1rem);
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.ff-display {
+  font-family: var(--ff-display);
+}
+
+.ff-barlow {
+  font-family: var(--ff-barlow);
+}
+
+.font-normal {
+  font-style: normal;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.text-primary {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.text-accent {
+  color: var(--clr-900);
+}
+
+.fs-base {
+  font-size: var(--fs-base);
+}
+
+.fs-large {
+  font-size: var(--fs-xl);
+}
+
+.mt-3 {
+  margin-top: var(--space-3);
+}
+
+.mb-3 {
+  margin-bottom: var(--space-3);
+}
+
+.mt-5 {
+  margin-top: var(--space-5);
+}
+
+.mb-5 {
+  margin-bottom: var(--space-5);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.container {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+  height: 100%;
+}
+
+/* ========= CENTERING CONTENT  ========= */
+.content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* =========================================================== */
+/* ================== COMPONENTS  ======================= */
+/* ========================================================== */
+
+.btn {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  font-family: var(--ff-inter);
+  font-weight: 500;
+}
+
+.btn-primary {
+  border: 2px solid var(--clr-900);
+  font-size: var(--fs-base);
+  background: transparent;
+  color: var(--text-primary);
+}
+
+/* ========================================= */
+/* ============ Global style ==============  */
+/* ========================================= */
+.page {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: #ffffff;
+
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  /* add transition  */
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ==================================== */
+/* ========= Heart animation ========== */
+/* =================================== */
+
+.hearts-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 14px;
+  opacity: 0.6;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateY(-110vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ============================== */
+/* ======= Landing Page =======  */
+/* ============================ */
+
+.headphone-hint {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-align: center;
+
+  opacity: 0.45;
+  color: var(--clr-900);
+
+  pointer-events: none;
+  user-select: none;
+
+  animation: fadeInUp 1.2s ease 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 0.45;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 480px) {
+  .headphone-hint {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    bottom: 1rem;
+  }
+}
+.landing-btn {
+  position: relative;
+  width: 120px;
+  height: 48px;
+
+  justify-self: center;
+  font-family: inherit;
+  font-weight: 900;
+  background: transparent;
+  letter-spacing: 0.3em;
+  font-weight: 500;
+  font-size: 1.1rem;
+  border-radius: 15px;
+  border: 2px solid var(--clr-900);
+  color: var(--clr-900);
+  cursor: pointer;
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.45s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+  overflow: hidden;
+}
+
+.landing-btn.loading {
+  width: 48px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--clr-900);
+  pointer-events: none;
+}
+
+.landing-btn:active {
+  transform: scale(0.97);
+}
+
+.btn-text {
+  transition: opacity 0.2s ease;
+}
+
+.landing-btn.loading .btn-text {
+  opacity: 0;
+}
+
+/* =============================== */
+/* ====== Spinner Animation ====== */
+/* ============================== */
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-top-color: var(--clr-900);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+
+  position: absolute;
+}
+
+.spinner-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.landing-btn.loading .spinner {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================ */
+/* ===== Typewrite page =====  */
+/* ========================== */
+
+.typewriter-page {
+  gap: 1.5rem;
+}
+
+.typewriter-lines {
+  background: var(--clr-w-100);
+  padding: var(--space-4);
+  width: clamp(300px, 70vw, 400px);
+  margin-inline: auto;
+
+  border-radius: var(--radius-sm);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+
+  line-height: 2.5;
+}
+
+.button-space {
+  --gap: 5rem;
+}
+
+.type-line {
+  font-size: 0.875rem;
+  color: black;
+  /* transform: translateY(150px); */
+  opacity: 1;
+  letter-spacing: 0.05em;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.type-line.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.visible-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ======================================= */
+/* ========= Affirmation Page ==========  */
+/* ===================================== */
+
+.affirmations-card {
+  background: var(--clr-w-100);
+  padding: var(--space-4);
+  width: minmax(100% - 2rem, 420px);
+  margin-inline: auto;
+
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  /* line-height: 1.7; */
+}
+
+.affirmation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.affirmation-title {
+  text-align: center;
+  font-weight: 600;
+  color: #0f5132;
+}
+
+.affirmation-line {
+  font-weight: 600;
+  color: var(--clr-900);
+  font-size: var(--fs-base);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  margin-bottom: 0.5rem;
+
+  animation: fadeUp 0.35s ease forwards;
+}
+
+/* .affirmation.show {
+  opacity: 0.8;
+  transform: translateY(0);
+} */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =================================== */
+/* ========= Memories Page =========  */
+/* ================================= */
+
+.section-sub-title {
+  margin-bottom: 1.5rem;
+}
+
+.quote-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.quote-card {
+  width: 100%;
+  max-width: 320px;
+  min-height: 180px;
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-size: 1rem;
+  color: #1f2933;
+}
+
+.quote-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* max-width: 160px; */
+  gap: 1rem;
+}
+
+.nav-btn {
+  border: none;
+  outline: none;
+  background: #0f5132;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.to-audio-btn {
+  margin-top: 1rem;
+  transition: opacity 0.6s ease;
+}
+
+/* ================================= */
+/* ========= Audio Page ==========  */
+/* =============================== */
+
+.audio-page {
+  position: relative;
+  text-align: center;
+}
+
+.audio-title {
+  margin-bottom: 0.5rem;
+}
+
+.audio-subtitle {
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
+
+/* ======== DARK RADIAL FADE ========  */
+.dark-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.85) 70%
+  );
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* .audio-page.focus-mode .dark-overlay {
+  opacity: 1;
+}
+
+.audio-text {
+  transition: opacity 0.6s ease;
+}
+
+.audio-page.focus-mode .audio-text {
+  opacity: 0;
+} */
+
+.btn-audio {
+  font-family: var(--ff-barlow);
+  color: var(--clr-900);
+  /* border: 1px solid var(--clr-900); */
+  background: transparent;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+  font-size: var(--fs-xl);
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+
+#finalMessage {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  z-index: 11;
+}
+
+#finalMessage h1 {
+  font-family: inherit;
+}

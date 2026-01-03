@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- ======== FONT FAMILY ======== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- ========= Main css file ==========  -->
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Happy Birthday Isale eko babe ❤️</title>
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <!-- ====== GLOBAL AUDIO ELEMENTS ====== -->
+    <audio id="bgMusic" loop></audio>
+    <audio id="voiceNote"></audio>
+
+    <!-- ========= HEART ANIMATION  =========== -->
+    <div class="hearts-container" id="hearts-container"></div>
+
+    <!-- ======== SECTION 1: HERO/LANDING PAGE ========= -->
+    <section class="page active" id="landing-page">
+      <div class="container">
+        <div class="content hero">
+          <h1 class="hero--text text-primary ff-display fs-large mb-5">
+            Happy Birthday Akanke 🎉
+          </h1>
+          <button class="landing-btn" id="landingBtn">
+            <span class="btn-text">Play me</span>
+            <span class="spinner spinner-hidden"></span>
+          </button>
+        </div>
+      </div>
+      <p class="headphone-hint">use headphones <br />for best experience</p>
+    </section>
+
+    <!-- SECTION 2: TYPEWRITER PAGE  -->
+    <section class="page" id="page-2">
+      <div class="container">
+        <div class="content typewriter-page">
+          <div class="typewriter-lines" id="typewriter-lines"></div>
+          <button class="btn btn-primary hidden" id="toPage3Btn">
+            Continue
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== SECTION 3: LITTLE THINGS PAGE ========= -->
+    <section class="page" id="page-3">
+      <div class="container">
+        <div class="content">
+          <div class="affirmations-card affirmation-stack">
+            <h2 class="ff-inter mb-5">The little things</h2>
+
+            <div class="affirmation-list" id="affirmationList"></div>
+
+            <button class="btn btn-primary" id="affirmationBtn">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= SECTION 4: QUOTES PAGE ========= -->
+    <section class="page" id="page-4">
+      <div class="container">
+        <div class="content">
+          <div class="quotes-card-container">
+            <h2 class="section-title">Classic Quotes</h2>
+            <p class="section-sub-title">by Dr Ogunba Aisha</p>
+
+            <div class="quote-card">
+              <div class="quote-card-content" id="quoteContent"></div>
+            </div>
+
+            <div class="quote-nav">
+              <button id="prevQuote" class="nav-btn"><</button>
+              <button id="nextQuote" class="nav-btn">></button>
+            </div>
+
+            <button class="btn btn-primary to-audio-btn hidden" id="toAudioBtn">
+              Keep going
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== SECTION 5: AUDIO + FINAL PAGE ========= -->
+    <section class="page" id="audio-page">
+      <div class="container audio-page">
+        <div class="content">
+          <h2 class="audio-title">I saved this for last.</h2>
+
+          <p class="audio-subtitle">Press play when you're ready.</p>
+
+          <button id="playVoiceNoteBtn" class="btn btn-primary">▶</button>
+        </div>
+
+        <!-- DARK OVERLAY  -->
+        <div class="dark-overlay" id="darkOverlay"></div>
+
+        <!-- FINAL MESSAGE  -->
+        <div id="finalMessage" class="hidden">
+          <h1>Happy Birthday Ife mi ❤️</h1>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
