@@ -1,20 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const bgMusic = document.getElementById("bgMusic");
-  const voiceNote = document.getElementById("voiceNote");
+  const bgMusic = new Audio("/audio/background-music.mp3");
+  const voiceNote = new Audio("/audio/voice-note.m4a");
   const playVoiceBtn = document.getElementById("playVoiceNoteBtn");
   const darkOverlay = document.getElementById("darkOverlay");
   const finalMessage = document.getElementById("finalMessage");
 
-  // === SET SOURCES EXPLICITLY ===
-  bgMusic.src = "/audio/background-music.mp3";
-  voiceNote.src = "/audio/voice-note.m4a";
+  // // === SET SOURCES EXPLICITLY ===
+  // bgMusic.src = "/audio/background-music.mp3";
+  // voiceNote.src = "/audio/voice-note.m4a";
 
   //Initial audio states
   bgMusic.volume = 0.5;
   bgMusic.preload = "auto";
+  bgMusic.loop = true;
+
+  voiceNote.volume = 1;
   voiceNote.preload = "auto";
 
-  let bgmFadeInterval = null;
+  // let bgmFadeInterval = null;
 
   // ========== PAGE SWITCHING LOGIC ==============
   const pages = document.querySelectorAll(".page");
@@ -71,20 +74,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  //SMOOTH FADE OUT FUNCTION
-  function fadeOutAudio(audio, duration = 2000) {
-    const step = audio.volume / (duration / 50);
+  // //SMOOTH FADE OUT FUNCTION
+  // function fadeOutAudio(audio, duration = 2000) {
+  //   const step = audio.volume / (duration / 50);
 
-    const fade = setInterval(() => {
-      if (audio.volume > step) {
-        audio.volume -= step;
-      } else {
-        audio.volume = 0;
-        audio.pause();
-        clearInterval(fade);
-      }
-    }, 50);
-  }
+  //   const fade = setInterval(() => {
+  //     if (audio.volume > step) {
+  //       audio.volume -= step;
+  //     } else {
+  //       audio.volume = 0;
+  //       audio.pause();
+  //       clearInterval(fade);
+  //     }
+  //   }, 50);
+  // }
+
+  function transitionToVoiceNote() {}
 
   // function startBGM() {
   //   bgMusic.volume = 0;
