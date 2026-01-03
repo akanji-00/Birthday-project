@@ -89,7 +89,25 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }, 50);
   // }
 
-  function transitionToVoiceNote() {}
+  function transitionToVoiceNote() {
+    //Fade out background music
+    let fadeInterval = setInterval(() => {
+      if (bgMusic.volume > 0.05) {
+        bgMusic.volume -= 0.05;
+      } else {
+        clearInterval(fadeInterval);
+
+        //HARD STOP (FOR iOS)
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
+
+        //Small delay to let safari register pause
+        setTimeout(() => {
+          voiceNote.play();
+        }, 250);
+      }
+    }, 80);
+  }
 
   // function startBGM() {
   //   bgMusic.volume = 0;
@@ -314,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //Play voice note activation
 
   playVoiceBtn.addEventListener("click", () => {
+    transitionToVoiceNote();
     //Hide text + button
     playVoiceBtn.style.opacity = "0";
     document.querySelector(".audio-title").style.opacity = "0";
@@ -322,8 +341,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Darken screen
     darkOverlay.style.opacity = "1";
 
-    //Fade background Music
-    fadeOutAudio(bgMusic, 2000);
+    // //Fade background Music
+    // fadeOutAudio(bgMusic, 2000);
 
     //Start voice note after short delay
     setTimeout(() => {
