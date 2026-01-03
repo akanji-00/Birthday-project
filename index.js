@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Initial audio states
   bgMusic.volume = 0.5;
-  bgMusic.preload = "auto";
+  // bgMusic.preload = "auto";
   bgMusic.loop = true;
 
   voiceNote.volume = 1;
-  voiceNote.preload = "auto";
+  // voiceNote.preload = "auto";
 
   // let bgmFadeInterval = null;
 
@@ -89,11 +89,13 @@ document.addEventListener("DOMContentLoaded", () => {
   //   }, 50);
   // }
 
-  function transitionToVoiceNote() {
+  function transitionToVoiceNote(voiceAudio, fadeDuration = 2000) {
+    const fadeStep = bgMusic.volume / (fadeDuration / 50);
+
     //Fade out background music
     let fadeInterval = setInterval(() => {
-      if (bgMusic.volume > 0.05) {
-        bgMusic.volume -= 0.05;
+      if (bgMusic.volume > fadeStep) {
+        bgMusic.volume -= fadeStep;
       } else {
         clearInterval(fadeInterval);
 
@@ -103,10 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //Small delay to let safari register pause
         setTimeout(() => {
-          voiceNote.play();
-        }, 250);
+          voiceAudio.play();
+        }, 150);
       }
-    }, 80);
+    }, 50);
   }
 
   // function startBGM() {
@@ -332,7 +334,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //Play voice note activation
 
   playVoiceBtn.addEventListener("click", () => {
-    transitionToVoiceNote();
     //Hide text + button
     playVoiceBtn.style.opacity = "0";
     document.querySelector(".audio-title").style.opacity = "0";
@@ -340,6 +341,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Darken screen
     darkOverlay.style.opacity = "1";
+
+    transitionToVoiceNote(voiceNote);
 
     // //Fade background Music
     // fadeOutAudio(bgMusic, 2000);
