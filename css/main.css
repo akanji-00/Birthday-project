@@ -458,6 +458,10 @@ img {
   /* line-height: 1.7; */
 }
 
+.affirmations-card button {
+  align-self: center;
+}
+
 .affirmation-list {
   display: flex;
   flex-direction: column;
@@ -517,8 +521,8 @@ img {
 }
 
 .quote-card {
-  width: 100%;
-  max-width: 320px;
+  /* width: 100%; */
+  width: 240px;
   min-height: 180px;
   background: white;
   border-radius: 16px;
